@@ -5,3 +5,7 @@ plugins {
     id 'org.jetbrains.kotlin.android' version '1.7.20' apply false
 }
 apply from: 'buildgradle/common.gradle'
+
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
