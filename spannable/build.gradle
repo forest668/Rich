@@ -10,6 +10,16 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 31
+
+    }
+
+    sourceSets {
+        main {
+            java.srcDirs += 'src/main.kotlin'
+        }
+        test {
+            java.srcDirs += 'src/test/kotlin'
+        }
     }
 
     buildTypes {
@@ -25,28 +35,39 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
-
     implementation 'androidx.core:core-ktx:1.5.0'
     implementation 'androidx.appcompat:appcompat:1.3.1'
 }
 
-task generateSourceJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier 'source'
-}
+group = "com.android.spannable"
+def artifactName = "spannable"
+version = "1.0.0"
 
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                from components.release
-                groupId = 'com.android.shape'
-                artifactId = 'shape'
-                version = '1.0.0'
+publishing {
+    repositories {
+        maven {
+            url = ""
+            credentials {
+                username = ""
+                password = ""
             }
         }
     }
+
+    publications {
+        shadow(MavenPublication) {publication ->
+//            project.shadow.component(publication)
+            groupId group.toString()
+            artifactId artifactName.toString()
+            version version.toString()
+        }
+    }
+
 }

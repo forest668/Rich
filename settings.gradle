@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "Rich"
 include ':app'
 include ':shape'
+include ':spannable'
